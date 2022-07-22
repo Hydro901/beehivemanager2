@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" style="color:white;">Beehive Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <div style="text-align: center;" >
+            <button routerLink="/home">Home</button>
+        </div>
+       <!-- <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+             <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Beehive <span class="sr-only">(current)</span></a>
+          </li>
+       </ul> -->
+  
+       <!-- <form class="form-inline my-2 my-lg-0">
+          <input type="search" (ngModelChange)= "searchBeehives(key.value)" #key="ngModel" ngModel
+           name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search in beehives..." required>
+       </form> -->
+    </div> 
+  </nav>
+
+<p>beehive works!</p>
+
+<table class="table" style="width: 50rem; margin-left: auto; margin-right: auto; margin-top: 2rem;">
+    <thead>
+      <tr>
+        <th scope="col">Immagine</th>
+        <th scope="col">Modello</th>
+        <th scope="col">Numero di Telai</th>
+        <th scope="col">Peso</th>
+        <th scope="col">Temperatura</th>
+        <th scope="col">Produzione</th>
+        <!-- Button trigger modal -->
+        <th><i class="fa-solid fa-plus add" type="button" data-toggle="modal" data-target="#insertModal"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let beehive of beehives">
+        
+<!--         <td [ngClass]="{disponibile : libro.disponibilita == true, nonDisponibile : libro.disponibilita == false}">{{libro.titolo}}</td>
+ -->        
+        
+        <td>{{beehive.picture}}</td>
+        <td>{{beehive.model}}</td>
+        <td>{{beehive.frames}}</td>
+        <td>{{beehive.weight}}</td>
+        <td>{{beehive.temperature}}</td>
+        <td>{{beehive.production}}</td>
+
+       <!--  <td><i (click)="updateSetup(beehive)" data-toggle="modal" data-target="#updateModal" class="fa-solid fa-pencil" style="margin-right: 1rem;"></i> 
+          <i (click) ="delete(libro)" class="fa-solid fa-trash"></i>
+          <span (click)="setStorico(beehive.id!)" data-toggle="modal" data-target="#storicoModal">storico</span>
+        </td> -->
+        
+      </tr>
+    </tbody>
+    <input type="file" (change)="catchFile($event)">
+    <button (click)="addBeehive()">save try</button>
+  </table>
+
+
+  <!-- Modal per l'add -->
+  <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="insertModalLabel">Modal title</h5>
+          <button id="closeInsertModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row">
+          <form [formGroup]="beehiveInsertForm">
+            <div class="row">
+                <div class="col">
+                    <label for="titolo">model:</label>
+                    <input formControlName = "model" id="model" type="text">
+                </div>
+                <div class="col">
+                    <label for="frames">telai:</label>
+                    <input formControlName = "frames" id="frames" type="number">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="weight">peso:</label>
+                    <input formControlName = "weight" id="weight" type="number">
+                </div>
+                <div class="col">
+                    <label for="temperature">temperatura:</label>
+                    <input formControlName = "temperature" id="temperature" type="number">
+                </div>
+                <div class="col">
+                    <label for="picture">immagine:</label>
+                    <input formControlName = "picture" id="picture" type="file">
+                </div>
+                
+            </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button (click) = "addBeehive()" type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
